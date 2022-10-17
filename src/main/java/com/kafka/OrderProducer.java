@@ -16,7 +16,7 @@ public class OrderProducer {
         props.setProperty("value.serializer", "org.apache.kafka.common.serialization.IntegerSerializer");
 
 
-        KafkaProducer<String, Integer> producer = new KafkaProducer<>(props);
+        KafkaProducer<String, Integer> producer = new KafkaProducer<String,Integer>(props);
         ProducerRecord<String,Integer> record = new ProducerRecord<>("OrderTopic", "Mac Book Pro", 10);
 
         try {
