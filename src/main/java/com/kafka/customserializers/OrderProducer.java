@@ -21,7 +21,7 @@ public class OrderProducer {
         order.setCustomerName("Sylwia");
         order.setProduct("Iphone");
         order.setQuantity(1);
-        ProducerRecord<String,Order> record = new ProducerRecord<>("OrderTopic", order.getCustomerName(), order);
+        ProducerRecord<String,Order> record = new ProducerRecord<>("OrderCSTopic", order.getCustomerName(), order);
 
         try {
             producer.send(record);
@@ -31,7 +31,7 @@ public class OrderProducer {
         } catch(Exception e) {
             e.printStackTrace();
         } finally {
-            //producer.close();
+            producer.close();
         }
 
 
