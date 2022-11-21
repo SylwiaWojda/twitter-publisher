@@ -1,0 +1,10 @@
+zookeeper-server-start /opt/homebrew/etc/kafka/zookeeper.properties
+
+
+kafka-server-start /opt/homebrew/etc/kafka/server.properties
+
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first-topic
+
+
+kafka-topics --list  --bootstrap-server localhost:9092
