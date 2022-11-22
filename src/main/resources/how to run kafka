@@ -15,4 +15,4 @@ kafka-topics --list  --bootstrap-server localhost:9092
 cd /home/sylwia/Pobrane/kafka_2.13-3.3.1/
 bin/zookeeper-server-start.sh config/zookeeper.properties
 cd /home/sylwia/Pobrane/kafka_2.13-3.3.1/
-bin/zookeeper-server-start.sh config/zookeeper.properties
+bin/kafka-server-start.sh config/server.properties
