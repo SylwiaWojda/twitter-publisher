@@ -17,6 +17,15 @@ public class OrderProducer {
 
 
         KafkaProducer<String, Order> producer = new KafkaProducer<String, Order>(props);
+        
+        //0. musi miec polaczenie z baza
+
+        //1. wybrac tweety z bazy danych
+        // jak przekazac parameter do wyszukiwania?
+
+        //2. zrobic obiekt tweet zamiast order
+
+
         Order order = new Order();
         order.setCustomerName("Sylwia");
         order.setProduct("Iphone");
