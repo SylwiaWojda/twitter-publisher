@@ -8,3 +8,11 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic first-topic
 
 
 kafka-topics --list  --bootstrap-server localhost:9092
+
+
+
+---how to run kafka on linux:
+cd /home/sylwia/Pobrane/kafka_2.13-3.3.1/
+bin/zookeeper-server-start.sh config/zookeeper.properties
+cd /home/sylwia/Pobrane/kafka_2.13-3.3.1/
+bin/zookeeper-server-start.sh config/zookeeper.properties
