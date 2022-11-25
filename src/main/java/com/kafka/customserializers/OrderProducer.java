@@ -33,7 +33,9 @@ public class OrderProducer {
         ProducerRecord<String,Order> record = new ProducerRecord<>("OrderCSTopic", order.getCustomerName(), order);
 
         try {
-            producer.send(record);
+            while(true) {
+                producer.send(record);
+            }
 //            System.out.println(recordMetadata.partition());
 //            System.out.println(recordMetadata.offset());
 //            System.out.println("Message send suc.");

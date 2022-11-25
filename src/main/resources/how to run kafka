@@ -16,3 +16,27 @@ cd /home/sylwia/Pobrane/kafka_2.13-3.3.1/
 bin/zookeeper-server-start.sh config/zookeeper.properties
 cd /home/sylwia/Pobrane/kafka_2.13-3.3.1/
 bin/kafka-server-start.sh config/server.properties
+
+
+---
+ps -ef | grep zookeeper
+kill -9 1431 (second)
+
+ps -ef | grep kafka
+kill -9 (second)
+
+HOW TO RUN ZOOKEEPER
+cd ../kafka_2.12-3.3.1
+ls
+cd bin
+sh zookeeper-server-start.sh ../config/zookeeper.properties
+
+HOW TO RUN KAFKA
+cd ../../kafka_2.12-3.3.1
+ls
+cd bin
+sh kafka-server-start.sh ../config/server.properties
+
+HOW TO CREATE A TOPIC:
+cd ../../kafka_2.12-3.3.1/bin
+sh kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic OrderCSTopic
