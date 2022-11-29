@@ -3,6 +3,8 @@ package com.kafka.customserializers;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import static java.lang.Thread.sleep;
@@ -15,20 +17,20 @@ public class TweetProducer {
         props.setProperty("bootstrap.servers", "localhost:9092");
         props.setProperty("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         //props.setProperty("value.serializer", "org.apache.kafka.common.serialization.IntegerSerializer");
-        props.setProperty("value.serializer", "com.kafka.customserializers.TweetSerializer");
+        props.setProperty("value.serializer", "com.kafka.customserializers.TweetsSerializer");
 
 
-        KafkaProducer<String, Tweet> producer = new KafkaProducer<String, Tweet>(props);
-        
-        //0. musi miec polaczenie z baza
-
-        //1. wybrac tweety z bazy danych
-        // jak przekazac parameter do wyszukiwania?
+        KafkaProducer<String, Tweets> producer = new KafkaProducer<String, Tweets>(props);
 
 
+        List<Tweet> tweetList = new ArrayList<Tweet>();
         Tweet tweet = new Tweet();
         tweet.setRawTweets("aaabbbccc");
-        ProducerRecord<String,Tweet> record = new ProducerRecord<>("OrderCSTopic", tweet.getRawTweets(), tweet);
+        tweetList.add(tweet);
+
+        Tweets tweets = new Tweets(tweetList);
+
+        ProducerRecord<String,Tweets> record = new ProducerRecord<>("OrderCSTopic", tweet.getRawTweets(), tweets);
 
 
         try {
