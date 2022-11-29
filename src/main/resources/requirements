@@ -1,0 +1,23 @@
+Please build a project to perform the following
+
+
+
+Build a microservice to Extract data from a public API – such as twitter API using a public twitter account
+Extract for a particular hour or few mins in a day, keep volumes to atleast 1000 messages
+Download tweets and store in local DB – store in raw format
+Get a count of number of messages retrieved
+Publish all extracted tweets from DB to Kafka. Build a consumer service and retrieve all published messages
+Make sure all messages downloaded have been published and you have received all messages published
+Build a 3rd service to extract tweets of a particular topic such as “Melbourne” or anything that is generic so we get sample topics
+Store the rest in another table or collection
+
+
+Demonstrate some or any of the concepts you have learnt, some examples below:
+
+
+
+Spring security, validation
+Java 8 capabilities
+JPA, Transaction management, exception handling
+Caching, collections
+Solid principles etc...
