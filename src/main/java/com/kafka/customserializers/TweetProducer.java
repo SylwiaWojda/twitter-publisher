@@ -1,14 +1,21 @@
 package com.kafka.customserializers;
 
+import com.jayway.jsonpath.TypeRef;
 import com.kafka.jpa.TweetRepository;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -36,28 +43,95 @@ public class TweetProducer {
 
         //todo
         //wywolac  tweetRepository.findAll();
+        //RestTemplate restTemplate = new RestTemplate();
 
-        //RestTemplate
-        WebClient webClient = WebClient.create("http://localhost:8080");
+        //dodac header z autoryzacja
 
-        Mono<String> response = webClient.get()
-                .uri("/twitter/allTweetsFromDb")
-                .retrieve()
-                .bodyToMono(String.class);
+        String fooResourceUrl
+                = "http://localhost:8080//twitter/allTweetsFromDb";
+//        ResponseEntity<String> response
+//                = restTemplate.getForEntity(fooResourceUrl, String.class);
 
-        List<Tweet> tweetList = new ArrayList<Tweet>();
-        Tweet tweet = new Tweet();
-        tweet.setRawTweets("aaabbbcccddeee");
-        tweetList.add(tweet);
+        List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
+//Add the Jackson Message converter
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 
-        Tweets tweets = new Tweets(tweetList);
+// Note: here we are making this converter to process any kind of response,
+// not only application/*json, which is the default behaviour
+        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+        messageConverters.add(converter);
+        //restTemplate.setMessageConverters(messageConverters);
 
-        ProducerRecord<String,Tweets> record = new ProducerRecord<>("OrderCSTopic", tweet.getRawTweets(), tweets);
+//        String plainCreds = "willie:p@ssword";
+//        byte[] plainCredsBytes = plainCreds.getBytes();
+//        byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
+//        String base64Creds = new String(base64CredsBytes);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add("Authorization", "Basic " + base64Creds);
+//
+//        HttpEntity<String> request = new HttpEntity<String>(headers);
+//        ResponseEntity<Tweets> response = restTemplate.exchange(fooResourceUrl, HttpMethod.GET, request, Tweets.class);
+//        Tweets tweets = response.getBody();
+
+
+//        List<Tweet> bookingIds = restTemplate.getForObject(fooResourceUrl, new TypeRef<List<Tweet>>() {
+//        });
+//        HttpHeaders headers = new HttpHeaders();
+//        HttpEntity<String> request = new HttpEntity<String>(headers);
+
+        final RestTemplate restTemplate = new RestTemplate();
+        //final String response = restTemplate.getForObject(fooResourceUrl, String.class);
+
+        //System.out.println(response);
+//        List<Tweet> tweet = restTemplate
+//                .getForObject(fooResourceUrl, new ArrayList<Tweet>());
+
+
+        ResponseEntity<Tweet[]> response =
+                restTemplate.getForEntity(
+                        fooResourceUrl,
+                        Tweet[].class);
+        Tweet[] employees = response.getBody();
+
+
+//        Tweets response = restTemplate.getForObject(
+//                fooResourceUrl,
+//                Tweets.class);
+//        List<Tweet> employees = response.getTweetList();
+
+
+
+
+
+//        List<Tweet> tweets = (List<Tweet>) restTemplate
+//                .getForObject(fooResourceUrl, Tweet.class);
+        //ResponseEntity<Tweet> response2 = restTemplate.exchange(fooResourceUrl, Tweet.class);
+//
+
+
+//        ResponseEntity<String> response = restTemplate.exchange(fooResourceUrl, HttpMethod.GET, request, String.class);
+        //ResponseEntity<Tweets> response = restTemplate.exchange(fooResourceUrl, HttpMethod.GET, request, Tweets.class);
+        //Tweets tweets = response.getBody();
+
+//        List<Tweet> tweets = (List<Tweet>) restTemplate
+//                .getForObject(fooResourceUrl, Tweet.class);
+
+
+
+//        List<Tweet> tweetList = new ArrayList<Tweet>();
+//        Tweet tweet = new Tweet();
+//        tweet.setRawTweets("aaabbbcccddeee");
+//        tweetList.add(tweet);
+//
+//        Tweets tweets = new Tweets(tweetList);
+
+//        ProducerRecord<String,Tweet> record =
+//                new ProducerRecord<>("OrderCSTopic", tweets.get(0).getRawTweets(), tweets);
 
 
         try {
             while(true) {
-                producer.send(record);
+                //producer.send(record);
                 sleep(100000);
             }
 //            System.out.println(recordMetadata.partition());

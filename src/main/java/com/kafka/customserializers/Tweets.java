@@ -1,8 +1,9 @@
 package com.kafka.customserializers;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Tweets {
+public class Tweets implements Serializable {
     private List<Tweet> tweetList;
 
     public Tweets(List<Tweet> tweetList) {
@@ -19,4 +20,7 @@ public class Tweets {
     public void setTweetList(List<Tweet> tweetList) {
         this.tweetList = tweetList;
     }
+
+
+
 }
