@@ -39,7 +39,7 @@ public class TweetProducer {
         props.setProperty("value.serializer", "com.kafka.customserializers.TweetsSerializer");
 
 
-        KafkaProducer<String, Tweets> producer = new KafkaProducer<String, Tweets>(props);
+        KafkaProducer<String, Tweet[]> producer = new KafkaProducer<String, Tweet[]>(props);
 
         //todo
         //wywolac  tweetRepository.findAll();
@@ -91,7 +91,7 @@ public class TweetProducer {
                 restTemplate.getForEntity(
                         fooResourceUrl,
                         Tweet[].class);
-        Tweet[] employees = response.getBody();
+        Tweet[] tweetsArray = response.getBody();
 
 
 //        Tweets response = restTemplate.getForObject(
@@ -125,13 +125,13 @@ public class TweetProducer {
 //
 //        Tweets tweets = new Tweets(tweetList);
 
-//        ProducerRecord<String,Tweet> record =
-//                new ProducerRecord<>("OrderCSTopic", tweets.get(0).getRawTweets(), tweets);
+        ProducerRecord<String, Tweet[]> record =
+                new ProducerRecord<String, Tweet[]>("OrderCSTopic", "tweets", tweetsArray);
 
 
         try {
             while(true) {
-                //producer.send(record);
+                producer.send(record);
                 sleep(100000);
             }
 //            System.out.println(recordMetadata.partition());
