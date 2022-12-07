@@ -2,6 +2,7 @@ package com.kafka.customserializers;
 
 import com.jayway.jsonpath.TypeRef;
 import com.kafka.jpa.TweetRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -21,6 +22,7 @@ import java.util.Properties;
 
 import static java.lang.Thread.sleep;
 
+@Slf4j
 //@Component
 public class TweetProducer {
 
@@ -36,7 +38,7 @@ public class TweetProducer {
         props.setProperty("bootstrap.servers", "localhost:9092");
         props.setProperty("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         //props.setProperty("value.serializer", "org.apache.kafka.common.serialization.IntegerSerializer");
-        props.setProperty("value.serializer", "com.kafka.customserializers.TweetsSerializer");
+        props.setProperty("value.serializer", "com.kafka.customserializers.TweetSerializer");
 
 
         KafkaProducer<String, Tweet[]> producer = new KafkaProducer<String, Tweet[]>(props);
@@ -126,12 +128,20 @@ public class TweetProducer {
 //        Tweets tweets = new Tweets(tweetList);
 
         ProducerRecord<String, Tweet[]> record =
-                new ProducerRecord<String, Tweet[]>("OrderCSTopic", "tweets", tweetsArray);
+                new ProducerRecord<String, Tweet[]>("OrderCSTopic", "tweet", tweetsArray);
 
 
         try {
+            //todo
             while(true) {
+                log.info("record " + record.toString());
+                log.info("tweet" + record.value()[0].toString());
                 producer.send(record);
+                for(Tweet t : record.value()) {
+
+                    log.info("abc" + t.getRawTweets());
+                }
+
                 sleep(100000);
             }
 //            System.out.println(recordMetadata.partition());
