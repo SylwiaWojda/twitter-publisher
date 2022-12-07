@@ -128,7 +128,7 @@ public class TweetProducer {
 //        Tweets tweets = new Tweets(tweetList);
 
         ProducerRecord<String, Tweet[]> record =
-                new ProducerRecord<String, Tweet[]>("OrderCSTopic", "tweet", tweetsArray);
+                new ProducerRecord<String, Tweet[]>("TweetTopic", "tweet", tweetsArray);
 
 
         try {
