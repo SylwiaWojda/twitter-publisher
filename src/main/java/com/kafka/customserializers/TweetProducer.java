@@ -134,12 +134,20 @@ public class TweetProducer {
         try {
             //todo
             while(true) {
-                log.info("record " + record.toString());
-                log.info("tweet" + record.value()[0].toString());
+                if(record != null && record.value() != null
+                && 0 < record.value().length
+                && null != record.value()[0]) {
+                    log.info("record " + record.toString());
+                    log.info("tweet" + record.value()[0].toString());
+                } else {
+                    log.info("NO RECORDS !!");
+                }
+
                 producer.send(record);
                 for(Tweet t : record.value()) {
 
-                    log.info("abc" + t.getRawTweets());
+                    log.info("raw tweet " + t.getRawTweets());
+                    log.info("amount " + t.getAmount());
                 }
 
                 sleep(100000);

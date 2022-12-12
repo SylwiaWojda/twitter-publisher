@@ -32,11 +32,11 @@ cd bin
 sh zookeeper-server-start.sh ../config/zookeeper.properties
 
 HOW TO RUN KAFKA
-cd ../../kafka_2.12-3.3.1
+cd ../../kafka_2.12-3.3.1Ï
 ls
 cd bin
 sh kafka-server-start.sh ../config/server.properties
 
 HOW TO CREATE A TOPIC:
 cd ../../kafka_2.12-3.3.1/bin
-sh kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic OrderCSTopic
+sh kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic TweetTopic
