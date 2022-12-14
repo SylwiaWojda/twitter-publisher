@@ -4,17 +4,17 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/a")
+@RequestMapping("/getTweetsFromDb")
 public class UserController {
 
     @Autowired
     private UserProducerService service;
 
-    @GetMapping("/b")
-    public void sendUserData() {
+    @GetMapping("/filterBy/{searchWord}")
+    public void sendUserData(@PathVariable String searchWord) {
         User user = new User();
         user.setAge(123);
-        user.setName("Ania");
+        user.setName(searchWord);
         service.sendUserData(user);
     }
 }
