@@ -1,7 +1,7 @@
 package com.kafka.spring;
 
 
-import com.kafka.customserializers.Tweet;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
