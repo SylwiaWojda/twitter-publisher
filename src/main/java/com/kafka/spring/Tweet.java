@@ -1,26 +1,22 @@
 package com.kafka.spring;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
 
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-@Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
-//@Entity(name = "Tweet_details")
-public class Tweet implements Serializable {
-
-
-    /*{"id":1,
-     "rawTweets":"While our car was returning, some cars chased us. BJP candidate (from Danta constituency) Latu Parghi &amp; 2 others came with weapons, with swords. We thought we must escape, we ran for 10-15 km &amp; for 2 hours we were in the jungle: Cong's Danta constituency candidate Kanti Kharadi https://t.co/QRN9JRO539",
-     "amount":"100"}*/
-
-//    @Id
-//    @GeneratedValue
+@Entity(name = "Tweet_details")
+public class Tweet {
+    @Id
+    @GeneratedValue
     private Integer id;
-//    @Column(length = 65555000)
+    @Column(length = 65555000)
     private String rawTweets;
-    
+
+    @Column(length = 65555000)
+    private String raw;
+
     private String amount;
 
     public Integer getId() {
@@ -47,6 +43,21 @@ public class Tweet implements Serializable {
         this.amount = amount;
     }
 
+    public String getRaw() {
+        return raw;
+    }
+
+    public void setRaw(String raw) {
+        this.raw = raw;
+    }
+
+    public Tweet(Integer id, String rawTweets, String raw, String amount) {
+        this.id = id;
+        this.rawTweets = rawTweets;
+        this.raw = raw;
+        this.amount = amount;
+    }
+
     public Tweet(Integer id, String rawTweets, String amount) {
         this.id = id;
         this.rawTweets = rawTweets;
@@ -55,5 +66,5 @@ public class Tweet implements Serializable {
 
     public Tweet() {
     }
-    
+
 }
