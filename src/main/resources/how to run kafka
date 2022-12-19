@@ -46,3 +46,6 @@ sh kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic TweetTopi
 
 how to send message by publisher:
 http://localhost:7777/getTweetsFromDb/getAll
+
+how to check if there is a lag:
+kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group user-group
