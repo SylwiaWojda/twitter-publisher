@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UserApi {
+public class TwitterApi {
     public static void main(String[] args) {
 
-        SpringApplication.run(UserApi.class, args);
+        SpringApplication.run(TwitterApi.class, args);
         System.out.println("Hello world!");
     }
 }

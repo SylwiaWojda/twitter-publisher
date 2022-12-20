@@ -7,17 +7,12 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class UserProducerService {
+public class TweetProducerService {
 
     @Autowired
     private KafkaTemplate<String, Tweet[]> kafkaTemplate;
 
-//    public void sendUserData(User user) {
-//        kafkaTemplate.send("user-topic", user.getName(), user);
-//    }
-
-
     public void sendTweetsToConsumer(Tweet[] tweetsArray) {
-        kafkaTemplate.send("user-topic", "tweets", tweetsArray);
+        kafkaTemplate.send("tweet-topic", "tweets", tweetsArray);
     }
 }

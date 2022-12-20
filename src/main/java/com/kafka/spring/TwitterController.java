@@ -8,19 +8,11 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/getTweetsFromDb")
-public class UserController {
+public class TwitterController {
 
     @Autowired
-    private UserProducerService service;
+    private TweetProducerService service;
 
-    //todo: przeniesc do consumer, bo to consumer bedzie wyszykiwal po key work z bazy
-//    @GetMapping("/filterBy/{searchWord}")
-//    public void sendUserData(@PathVariable String searchWord) {
-//        User user = new User();
-//        user.setAge(123);
-//        user.setName(searchWord);
-//        service.sendUserData(user);
-//    }
 
     @GetMapping("/getAll")
     public void getAllTweets() {
