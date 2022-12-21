@@ -16,14 +16,14 @@ public class TwitterController {
 
     @GetMapping("/getAll")
     public void getAllTweets() {
-        String fooResourceUrl
+        String resourceUrl
                 = "http://localhost:8080//twitter/allTweetsFromDb";
 
         final RestTemplate restTemplate = new RestTemplate();
 
         ResponseEntity<com.kafka.spring.Tweet[]> response =
                 restTemplate.getForEntity(
-                        fooResourceUrl,
+                        resourceUrl,
                         com.kafka.spring.Tweet[].class);
         Tweet[] tweetsArray = response.getBody();
 
