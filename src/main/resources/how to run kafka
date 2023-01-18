@@ -49,3 +49,11 @@ http://localhost:7777/getTweetsFromDb/getAll
 
 how to check if there is a lag:
 kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group user-group
+
+how to search by word:
+http://localhost:8085/consumer/search/Melbourne
+
+//create second database . with docker
+//        consumer save all tweets
+run sql query on both database and check if it the same
+//splunk.
