@@ -27,7 +27,23 @@ public class TwitterController {
                         com.kafka.spring.Tweet[].class);
         Tweet[] tweetsArray = response.getBody();
 
+
+        String resourceUrlUpdate
+                = "http://localhost:8080//twitter/updateIsPublishFlagOnAllTweetsFromDb";
+
+        final RestTemplate restTemplateUpdate = new RestTemplate();
+
+        ResponseEntity<com.kafka.spring.Tweet[]> responseUpdate =
+                restTemplateUpdate.getForEntity(
+                        resourceUrlUpdate,
+                        com.kafka.spring.Tweet[].class);
+
         service.sendTweetsToConsumer(tweetsArray);
+
+
+        //update all tweets on db as send
+
+
     }
 
 }

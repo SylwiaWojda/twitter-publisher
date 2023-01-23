@@ -16,8 +16,18 @@ public class Tweet {
 
     @Column(length = 65555000)
     private String raw;
-
+    
     private String amount;
+
+    private Boolean isPublish;
+
+    public Boolean getPublish() {
+        return isPublish;
+    }
+
+    public void setPublish(Boolean publish) {
+        isPublish = publish;
+    }
 
     public Integer getId() {
         return id;
@@ -65,6 +75,13 @@ public class Tweet {
     }
 
     public Tweet() {
+    }
+
+    public Tweet(Integer id, String rawTweets, String amount, Boolean isPublish) {
+        this.id = id;
+        this.rawTweets = rawTweets;
+        this.amount = amount;
+        this.isPublish = isPublish;
     }
 
 }
